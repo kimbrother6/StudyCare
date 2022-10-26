@@ -6,7 +6,7 @@ def crearte_template_TODO():
 	Returns:
 		str : 새로 만들어진 파일 경로
 	"""
-	file_name = f"files/{year}년_{year_weeks}주차_TODO"
+	file_name = f"download_files/{year}년_{year_weeks}주차_TODO"
 	f = open(f"StudyCare/{file_name}", "w")
 	f.write(f"{year}년 {year_weeks}주차({str_weekly_monday}~{str_weekly_sunday}) TODO\n")
 	f.write("[] - ")
