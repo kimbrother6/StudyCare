@@ -1,6 +1,6 @@
-from fileinput import filename
+from urllib import response
 from flask import render_template
-from flask import Flask, send_file
+from flask import Flask, send_file, Response
 from functions.create.templates import crearte_template_TODO
 
 app = Flask(__name__)
@@ -15,10 +15,10 @@ def createTODO():
 	"""새롭게 생성된 일주일 TODO템플릿 다운로드
 
 	Returns:
-		text file: 다음주 템플릿
+		text_file: 다음주 템플릿
 	"""
-	file_name = crearte_template_TODO()
-	
-	return send_file(file_name,
-                    mimetype='text/plain',
-                    as_attachment=True)
+	file_text, file_name = crearte_template_TODO()
+	response = Response(file_text, mimetype='text/plain')
+
+	response.headers["Content-Disposition"] = f"attachment; filename={file_name}"
+	return response
