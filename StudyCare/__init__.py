@@ -1,7 +1,6 @@
-from urllib import response
 from flask import render_template
-from flask import Flask, send_file, Response
-from functions.create.templates import crearte_template_TODO
+from flask import Flask, Response
+from functions.create.templates import crearte_todo_template
 
 app = Flask(__name__)
 
@@ -11,14 +10,13 @@ def home_page():
 
 
 @app.route("/api/createTODO")
-def createTODO():
-	"""새롭게 생성된 일주일 TODO템플릿 다운로드
+def download_todo_template():
 
-	Returns:
-		text_file: 다음주 템플릿
-	"""
-	file_text, file_name = crearte_template_TODO()
-	response = Response(file_text, mimetype='text/plain')
+	template, template_name = crearte_todo_template()
+	
+	response = Response(template, mimetype='text/plain')
 
-	response.headers["Content-Disposition"] = f"attachment; filename={file_name}"
+	#다운로드하게 리스폰스 헤더 설정
+	response.headers["Content-Disposition"] = f"attachment; filename={template_name}"
+
 	return response
