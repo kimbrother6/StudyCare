@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home_page():
-	return render_template('main.html')
+	return render_template('home-page.html')
 
 
 @app.route("/api/createTODO")
-def download_todo_template():
+def download_todo_template():	
 
 	template, template_name = get_todo_template()
 	
@@ -20,3 +20,6 @@ def download_todo_template():
 	response.headers["Content-Disposition"] = f"attachment; filename={template_name}"
 
 	return response
+
+
+

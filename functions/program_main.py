@@ -1,4 +1,4 @@
-import create.template
+import create.templates
 import DB.cmd
 from DB import translate
 #명령어 입력
@@ -6,7 +6,7 @@ cmd = input("Cmd: ")
 
 try: 
 	if cmd == "create TODO":
-		create.template.TODO()
+		create.templates.TODO()
 
 	elif cmd == "update":
 
