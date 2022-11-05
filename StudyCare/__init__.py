@@ -1,6 +1,6 @@
 from flask import render_template
 from flask import Flask, Response
-from functions.create.templates import crearte_todo_template
+from functions.create.templates import get_todo_template
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ def home_page():
 @app.route("/api/createTODO")
 def download_todo_template():
 
-	template, template_name = crearte_todo_template()
+	template, template_name = get_todo_template()
 	
 	response = Response(template, mimetype='text/plain')
 
