@@ -1,6 +1,10 @@
 from flask import Flask, Response, redirect, render_template
 from functions.create.templates import get_todo_template
 from settings import settings
+from DB_cmd import DB_set_reference_day, get_reference_day
+
+temp_user = 'kimbro6'
+
 
 app = Flask(__name__)
 
@@ -12,7 +16,7 @@ def home_page():
 @app.route("/api/download_todo_template")
 def download_todo_template():	
 
-	template, template_name = get_todo_template(settings['reference_day'])
+	template, template_name = get_todo_template(get_reference_day(temp_user))
 	
 	response = Response(template, mimetype='text/plain')
 
@@ -23,7 +27,7 @@ def download_todo_template():
 
 @app.route("/api/setting/reference_day/<int:reference_day>")
 def set_reference_day(reference_day):
-	settings['reference_day'] = reference_day
-	print(settings)
+	DB_set_reference_day(temp_user, reference_day)
+
 	return redirect('/')    
 

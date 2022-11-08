@@ -10,6 +10,32 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+def DB_cmd(cmd):
+	mycursor.execute(f"{cmd}")
+
+
+def DB_set_reference_day(user, reference_day):
+	"""user: str
+	reference_day: int"""
+
+
+	update = f"""UPDATE StudyCare.setting
+	SET reference_day={reference_day}
+	WHERE user='{user}'
+	"""
+
+	mycursor.execute(update)
+	mydb.commit()
+
+	print(mycursor.rowcount, "record inserted.")
+
+def get_reference_day(user):
+	mycursor.execute(f"SELECT reference_day FROM StudyCare.setting WHERE user='{user}'")
+	# 추가로 조건: WHERE id = 2, 정렬: 'ORDER BY name', 거꾸로 정렬: 'ORDER BY name DESC' 사용가능
+
+	reference_day = mycursor.fetchall()[0][0]
+	return reference_day
+
 
 def create(data_bundle):
 	crate = f"""INSERT IGNORE INTO TODO
@@ -40,5 +66,3 @@ def delete():
 	print(mycursor.rowcount, "record(s) deleted")
 
 
-def coustom():
-	mycursor.execute("")
