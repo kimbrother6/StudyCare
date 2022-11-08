@@ -1,7 +1,10 @@
-from functions.create import date
+from functions.create import get_date
 
-def get_todo_template():
+
+def get_todo_template(reference_day):
 	"새로운 TODO템플릿을 만들고, 그것과 파일이름 반환"
+	
+	date = get_date(reference_day)
 
 	template = f"{date['year']}년 {date['week']}주차({date['monday']}~{date['sunday']}) TODO\n[] - "
 
