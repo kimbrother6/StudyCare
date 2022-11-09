@@ -1,4 +1,4 @@
-from flask import Flask, Response, redirect, render_template
+from flask import Flask, Response, redirect, render_template, request
 from functions.create.templates import get_todo_template
 from settings import settings
 from DB_cmd import DB_set_reference_day, get_reference_day
@@ -25,8 +25,9 @@ def download_todo_template():
 
 	return response
 
-@app.route("/api/setting/reference_day/<int:reference_day>")
-def set_reference_day(reference_day):
+@app.route("/api/setting/reference_day/")
+def set_reference_day():
+	reference_day = request.args.get('reference_day')
 	DB_set_reference_day(temp_user, reference_day)
 
 	return redirect('/')    
