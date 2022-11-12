@@ -13,7 +13,6 @@ mycursor = mydb.cursor()
 def DB_cmd(cmd):
 	mycursor.execute(f"{cmd}")
 
-
 def DB_set_reference_day(user, reference_day):
 	"""user: str
 	reference_day: int"""
@@ -64,6 +63,18 @@ def get_schedules(year, week):
 	schedules = mycursor.fetchall()
 
 	return schedules
+
+def insert_schedule(schedule):
+	insert = f"""INSERT INTO StudyCare.schedule
+	(st_year, st_week, ed_year, ed_week, content, cycle)
+	VALUES (%s, %s, %s, %s, %s, %s)
+	"""
+	
+	mycursor.execute(insert, schedule)
+	mydb.commit()
+
+	print(mycursor.rowcount, "record inserted.")
+
 
 
 def create(data_bundle):

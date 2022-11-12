@@ -1,7 +1,7 @@
 from flask import Flask, Response, redirect, render_template, request
 from functions.create.templates import get_todo_template
 from settings import settings
-from DB_cmd import DB_set_reference_day, get_reference_day
+from DB_cmd import DB_set_reference_day, get_reference_day, insert_schedule
 
 temp_user = 'kimbro6'
 
@@ -32,3 +32,11 @@ def set_reference_day():
 
 	return redirect('/')    
 
+@app.route("/api/add_schedule/")
+def add_schedule():
+
+	schedule = [request.args.get('st_year'), request.args.get('st_week'), request.args.get('ed_year'), request.args.get('ed_week'), request.args.get('content'), request.args.get('cycle')]
+
+	insert_schedule(schedule)
+
+	return redirect('/')
