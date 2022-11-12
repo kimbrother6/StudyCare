@@ -35,9 +35,9 @@ def get_reference_day(user):
 	reference_day = mycursor.fetchall()[0][0]
 	return reference_day
 
-def get_this_week_schedule(year, week):
+def get_this_week_schedules(year, week):
 
-	schedules = get_schedule(year, week)
+	schedules = get_schedules(year, week)
 
 	this_week_schedule = []
 
