@@ -1,7 +1,8 @@
 from flask import Flask, Response, redirect, render_template, request
 from functions.create.templates import get_todo_template
 from settings import settings
-from DB_cmd import DB_set_reference_day, get_reference_day, insert_schedule
+from DB_cmd.reference_day import DB_set_reference_day, DB_get_reference_day
+from DB_cmd.schedule import insert_schedule
 
 temp_user = 'kimbro6'
 
@@ -16,7 +17,7 @@ def home_page():
 @app.route("/api/download_todo_template")
 def download_todo_template():	
 
-	template, template_name = get_todo_template(get_reference_day(temp_user))
+	template, template_name = get_todo_template(DB_get_reference_day(temp_user))
 	
 	response = Response(template, mimetype='text/plain')
 
@@ -24,6 +25,7 @@ def download_todo_template():
 	response.headers["Content-Disposition"] = f"attachment; filename={template_name}"
 
 	return response
+
 
 @app.route("/api/setting/reference_day/")
 def set_reference_day():

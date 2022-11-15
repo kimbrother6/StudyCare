@@ -1,5 +1,5 @@
 from functions.create import get_date
-from DB_cmd import get_this_week_schedules
+from DB_cmd.schedule import get_this_week_schedules
 
 def get_todo_template(reference_day):
 	"새로운 TODO템플릿을 만들고, 그것과 파일이름 반환"
