@@ -3,7 +3,7 @@ from functions.create.templates import get_todo_template
 from settings import settings
 from DB_cmd.reference_day import DB_set_reference_day, DB_get_reference_day
 from DB_cmd.schedule import insert_schedule
-from DB_cmd.TODO import insert_TODO_data
+from DB_cmd.TODO import insert_TODO_data, get_TODO_records
 from functions.DB.translate import get_TODO_data
 
 temp_user = 'kimbro6'
@@ -57,3 +57,9 @@ def upload_TODO():
 	insert_TODO_data(TODO_data)
 
 	return redirect('/')
+
+@app.route("/record/")
+def record():
+	records = get_TODO_records()
+	
+	return render_template('records.html', records = records)
