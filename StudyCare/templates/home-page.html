@@ -28,6 +28,12 @@
 		<input type="text" name="cycle" placeholder="cycle: int">
 		<input type="submit" class="btn btn-primary" value="스케줄 추가하기">
 	</form>
-
+	<br><br><br>
+	
+	<form action="/api/upload_TODO/" method = "POST" enctype = "multipart/form-data">
+		<input type="file" name="TODO" placeholder="TODO">
+		<input type="submit" class="btn btn-primary" value="파일 업로드">
+	</form>
+	{{state}}
 </body>
 </html>

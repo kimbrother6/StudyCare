@@ -3,6 +3,8 @@ from functions.create.templates import get_todo_template
 from settings import settings
 from DB_cmd.reference_day import DB_set_reference_day, DB_get_reference_day
 from DB_cmd.schedule import insert_schedule
+from DB_cmd.TODO import insert_TODO_data
+from functions.DB.translate import get_TODO_data
 
 temp_user = 'kimbro6'
 
@@ -40,5 +42,18 @@ def add_schedule():
 	schedule = [request.args.get('st_year'), request.args.get('st_week'), request.args.get('ed_year'), request.args.get('ed_week'), request.args.get('content'), request.args.get('cycle')]
 
 	insert_schedule(schedule)
+
+	return redirect('/')
+
+
+
+@app.route("/api/upload_TODO/", methods=["POST"])
+def upload_TODO():
+	TODO_file = request.files['TODO']
+	TODO = TODO_file.stream.read().decode('utf-8')
+
+	TODO_data = get_TODO_data(TODO)
+
+	insert_TODO_data(TODO_data)
 
 	return redirect('/')
